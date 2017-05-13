@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from sklearn.preprocessing import MinMaxScaler
 from mlxtend.preprocessing import one_hot
 
 
@@ -57,6 +58,8 @@ def preprocessing():
 
     # dateType
 
+
+########
     # commonHobby
     processedData = np.append(processedData, preprocessing_yes_no_dont_know(dataset['commonHobby']), axis=1)
 
@@ -66,6 +69,8 @@ def preprocessing():
     # seriousConversation
     processedData = np.append(processedData, preprocessing_yes_no_dont_know(dataset['seriousConversation']), axis=1)
     # print(preprocessing_yes_no_dont_know(dataset['commonHobby']))
+#########
+
 
     # group
     processedData = np.append(processedData, preprocessing_one_hot_encoding(dataset['group']), axis=1)
@@ -103,7 +108,10 @@ def preprocessing_age(cols):
 
     for i in range(0, len(cols)):
         np_cols[i] = cols[i]
-    return np_cols.reshape(-1, 1)
+
+    scaler = MinMaxScaler(feature_range=(0, 1))
+
+    return scaler.fit_transform(np_cols.reshape(-1, 1))
 
 
 def preprocessing_yes_no_dont_know(cols):
@@ -113,9 +121,9 @@ def preprocessing_yes_no_dont_know(cols):
         if cols[i] == '네':
             np_cols[i] = 1
         if cols[i] == '아니오':
-            np_cols[i] = -1
-        if cols[i] == '모름':
             np_cols[i] = 0
+        if cols[i] == '모름':
+            np_cols[i] = 0.5
 
     return np_cols.reshape(-1, 1)
 
@@ -144,7 +152,8 @@ def preprocessing_meeting_cycle(cols):
         if cols[i] == '1달에 한번 이하':
             np_cols[i] = 0.25
 
-    return np_cols.reshape(-1, 1)
+    scaler = MinMaxScaler(feature_range=(0, 1))
+    return scaler.fit_transform(np_cols.reshape(-1, 1))
 
 
 # 1시간 이내 -> 1
@@ -167,7 +176,8 @@ def preprocessing_length_of_time_together(cols):
         if cols[i] == '1시간 이내':
             np_cols[i] = 1
 
-    return np_cols.reshape(-1, 1)
+    scaler = MinMaxScaler(feature_range=(0, 1))
+    return scaler.fit_transform(np_cols.reshape(-1, 1))
 
 
 def preprocessing_one_hot_encoding(cols):
@@ -210,7 +220,9 @@ def preprocessing_replyTime(reply_time_cols):
         if reply_time_cols[i] == '4시간~8시간':
             processed_reply_time_cols[i] = 1
 
-    return processed_reply_time_cols.reshape(-1, 1)
+    scaler = MinMaxScaler(feature_range=(0, 1))
+    return scaler.fit_transform(processed_reply_time_cols.reshape(-1, 1))
+    # return processed_reply_time_cols.reshape(-1, 1)
 
 
 # 아침 1
@@ -235,7 +247,9 @@ def preprocessing_timezone_for_chattings(timezone_for_chattings_cols):
 
         processed_timezone_for_chattings_cols[i] = value
 
-    return processed_timezone_for_chattings_cols.reshape(-1, 1)
+    scaler = MinMaxScaler(feature_range=(0, 1))
+    return scaler.fit_transform(processed_timezone_for_chattings_cols.reshape(-1, 1))
+    # return processed_timezone_for_chattings_cols.reshape(-1, 1)
 
 
 # categorical value to int
