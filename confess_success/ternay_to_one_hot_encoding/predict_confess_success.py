@@ -3,15 +3,14 @@ os.environ['TF_CPP_MIN_LOG_LEVEL']='2'
 import tensorflow as tf
 import numpy as np
 from numpy import genfromtxt
-
+from sklearn.model_selection import train_test_split
 # tf.set_random_seed(777)  # for reproducibility
 
 my_data = genfromtxt("../data/ternary_to_one_hot.csv", delimiter=',')
 
 x_data = my_data[:,:-1].tolist()
-print(x_data)
-y_data = my_data[:,-1].reshape(-1,1).tolist()
-print(y_data)
+y_data = my_data[:,-1:].tolist()
+x_train_data, x_test_data , y_train_data, y_test_data=train_test_split(x_data,y_data,test_size=0.05,random_state=20)
 
 X = tf.placeholder(tf.float32, shape=[None, 69])
 Y = tf.placeholder(tf.float32, shape=[None, 1])
@@ -37,12 +36,12 @@ with tf.Session() as sess:
     # Initialize TensorFlow variables
     sess.run(tf.global_variables_initializer())
 
-    for step in range(100001):
-        cost_val, _ = sess.run([cost, train], feed_dict={X: x_data, Y: y_data})
+    for step in range(50001):
+        cost_val, _ = sess.run([cost, train], feed_dict={X: x_train_data, Y: y_train_data})
         if step % 200 == 0:
             print(step, cost_val)
 
     # Accuracy report
     h, c, a = sess.run([hypothesis, predicted, accuracy],
-                       feed_dict={X: x_data, Y: y_data})
+                       feed_dict={X: x_test_data, Y: y_test_data})
     print("\nHypothesis: ", h, "\nCorrect (Y): ", c, "\nAccuracy: ", a)

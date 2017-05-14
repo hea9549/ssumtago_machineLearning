@@ -5,7 +5,7 @@ from mlxtend.preprocessing import one_hot
 
 
 def preprocessing():
-    dataset = pd.read_csv("./data/dataset2.csv")
+    dataset = pd.read_csv("../../data/dataset2.csv")
 
     # reply time
     reply_time_cols = dataset['replyTime']
@@ -58,19 +58,15 @@ def preprocessing():
 
     # dateType
 
-
-########
     # commonHobby
-    processedData = np.append(processedData, preprocessing_yes_no_dont_know(dataset['commonHobby']), axis=1)
+    processedData = np.append(processedData, preprocessing_one_hot_encoding(dataset['commonHobby']), axis=1)
 
     # commonConcern
-    processedData = np.append(processedData, preprocessing_yes_no_dont_know(dataset['commonConcern']), axis=1)
+    processedData = np.append(processedData, preprocessing_one_hot_encoding(dataset['commonConcern']), axis=1)
 
     # seriousConversation
-    processedData = np.append(processedData, preprocessing_yes_no_dont_know(dataset['seriousConversation']), axis=1)
+    processedData = np.append(processedData, preprocessing_one_hot_encoding(dataset['seriousConversation']), axis=1)
     # print(preprocessing_yes_no_dont_know(dataset['commonHobby']))
-#########
-
 
     # group
     processedData = np.append(processedData, preprocessing_one_hot_encoding(dataset['group']), axis=1)
@@ -84,11 +80,13 @@ def preprocessing():
 
     # sex
     processedData = np.append(processedData, preprocessing_sex(dataset['sex']), axis=1)
+    print(preprocessing_sex(dataset['sex']))
+    # howmanyLabel
+    processedData = np.append(processedData,preprocessing_one_hot_encoding(dataset['howMany']),axis=1)
 
-    # label
-    processedData = np.append(processedData,preprocessing_age(dataset['Label']),axis=1)
+    print(preprocessing_one_hot_encoding(dataset['howMany']).shape)
 
-    print(preprocessing_age(dataset['Label']))
+    # print(preprocessing_age(dataset['Label']))
     return processedData
 
 def preprocessing_sex(cols):
@@ -270,4 +268,4 @@ def category_array_to_int_array(categorical_array):
 
 
 processed_data = preprocessing()
-np.savetxt("./data/confess_success.csv",processed_data,delimiter=",")
+np.savetxt("../data/when_to_confess_ternary_one_hot_encoding.csv",processed_data,delimiter=",")

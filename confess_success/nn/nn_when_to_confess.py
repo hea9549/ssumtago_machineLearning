@@ -3,35 +3,36 @@ os.environ['TF_CPP_MIN_LOG_LEVEL']='2'
 import tensorflow as tf
 import numpy as np
 from numpy import genfromtxt
-
-
+from sklearn.model_selection import train_test_split
 # tf.set_random_seed(777)  # for reproducibility
-train_ratio = 200
-my_data = genfromtxt("./data/confess_success.csv", delimiter=',')
 
-x_train_data = my_data[:,:-1].tolist()[:train_ratio]
-print(len(x_train_data))
-y_train_data = my_data[:,-1].reshape(-1,1).tolist()[:train_ratio]
+my_data = genfromtxt("../data/ternary_to_one_hot.csv", delimiter=',')
 
-x_test_data = my_data[:,:-1].tolist()[train_ratio:-1]
-print(len(x_test_data))
-y_test_data = my_data[:,-1:].tolist()[train_ratio:-1]
-print(len(y_test_data))
+x_data = my_data[:,:-1].tolist()
+y_data = my_data[:,-1:].tolist()
+x_train_data, x_test_data , y_train_data, y_test_data=train_test_split(x_data,y_data,test_size=0.05,random_state=10)
+print(x_train_data)
 
-X = tf.placeholder(tf.float32, shape=[None, 63])
+X = tf.placeholder(tf.float32, shape=[None, 69])
 Y = tf.placeholder(tf.float32, shape=[None, 1])
 
-W = tf.Variable(tf.random_normal([63, 1]), name='weight')
-b = tf.Variable(tf.random_normal([1]), name='bias')
+W1 = tf.Variable(tf.random_normal([69, 69]), name='weight1')
+b1 = tf.Variable(tf.random_normal([69]), name='bias1')
+layer1 = tf.sigmoid(tf.matmul(X, W1) + b1)
 
-# Hypothesis using sigmoid: tf.div(1., 1. + tf.exp(tf.matmul(X, W)))
-hypothesis = tf.sigmoid(tf.matmul(X, W) + b)
+W2 = tf.Variable(tf.random_normal([69, 69]), name='weight2')
+b2 = tf.Variable(tf.random_normal([69]), name='bias2')
+layer2 = tf.sigmoid(tf.matmul(layer1, W2) + b2)
+
+W3 = tf.Variable(tf.random_normal([69, 1]), name='weight3')
+b3 = tf.Variable(tf.random_normal([1]), name='bias3')
+hypothesis = tf.sigmoid(tf.matmul(layer2, W3) + b3)
 
 # cost/loss function
 cost = -tf.reduce_mean(Y * tf.log(hypothesis) + (1 - Y) *
                        tf.log(1 - hypothesis))
 
-train = tf.train.GradientDescentOptimizer(learning_rate=0.05).minimize(cost)
+train = tf.train.GradientDescentOptimizer(learning_rate=0.1).minimize(cost)
 
 # Accuracy computation
 # True if hypothesis>0.5 else False
