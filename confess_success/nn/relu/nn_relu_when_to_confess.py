@@ -1,7 +1,6 @@
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL']='2'
 import tensorflow as tf
-import numpy as np
 from numpy import genfromtxt
 from sklearn.model_selection import train_test_split
 import matplotlib.pylab as plt
@@ -16,9 +15,9 @@ y_data = my_data[:,-1:].tolist()
 
 x_num_of_feature = len(x_data[0])
 
-x_train_data, x_test_data , y_train_data, y_test_data=train_test_split(x_data,y_data,test_size=0.20,random_state=40)
+x_train_data, x_test_data , y_train_data, y_test_data=train_test_split(x_data, y_data, test_size=0.08, random_state=20)
 print(len(x_train_data))
-num_of_unit = 64
+num_of_unit = 16
 X = tf.placeholder(tf.float32, shape=[None, x_num_of_feature])
 Y = tf.placeholder(tf.float32, shape=[None, 1])
 
@@ -83,7 +82,7 @@ hypothesis = tf.sigmoid(tf.matmul(L8, W9) + b9)
 cost = -tf.reduce_mean(Y * tf.log(hypothesis) + (1 - Y) *
                        tf.log(1 - hypothesis))
 
-train = tf.train.AdamOptimizer(learning_rate=0.00001).minimize(cost)
+train = tf.train.AdamOptimizer(learning_rate=0.0000511).minimize(cost)
 
 # Accuracy computation
 # True if hypothesis>0.5 else False
@@ -104,13 +103,14 @@ with tf.Session() as sess:
 
             h, c, train_a = sess.run([hypothesis, predicted, accuracy],
                                feed_dict={X: x_train_data, Y: y_train_data, keep_prob: 1})
+
             accuracy_train_list.append(train_a)
             h, c, a = sess.run([hypothesis, predicted, accuracy],
                                feed_dict={X: x_test_data, Y: y_test_data, keep_prob: 1})
             # print("\nHypothesis: ", h, "\nCorrect (Y): ", c, "\nAccuracy: ", a, "Real (Y)", y_test_data)
             accuracy_test_list.append(a)
 
-            print(step, cost_val,train_a,a)
+            print(step, cost_val, train_a, a)
             if train_a > 0.95:
                  break
 
@@ -131,15 +131,15 @@ with tf.Session() as sess:
     woman = 0
     for data in x_test_data:
         if data[-1] == 0.0:
-            woman +=1
+            woman += 1
         if data[-1] == 1.0:
-            man+=1
+            man += 1
 
-    print("man:",man,"woman:",woman)
+    print("man:", man, "woman:", woman)
 
-    gat, = plt.plot(step_list, accuracy_test_list,'ro-')
+    gat, = plt.plot(step_list, accuracy_test_list, 'ro-')
     bat, = plt.plot(step_list, accuracy_train_list, 'bs-')
-    plt.legend([gat,bat],['test data','train data'],loc=2)
+    plt.legend([gat, bat], ['test data','train data'], loc=2)
     plt.xlabel('number of step')
     plt.ylabel('accuracy')
     plt.show()
