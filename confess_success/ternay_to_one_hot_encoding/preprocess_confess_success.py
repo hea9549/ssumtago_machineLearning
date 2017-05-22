@@ -245,13 +245,11 @@ def preprocessing_timezone_for_chattings(timezone_for_chattings_cols):
             value += 4
         if "새벽" in timezone_for_chattings_cols[i]:
             value += 5
-
         processed_timezone_for_chattings_cols[i] = value
 
     scaler = MinMaxScaler(feature_range=(0, 1))
     return scaler.fit_transform(processed_timezone_for_chattings_cols.reshape(-1, 1))
     # return processed_timezone_for_chattings_cols.reshape(-1, 1)
-
 
 # categorical value to int
 # return int_array, dicSize
