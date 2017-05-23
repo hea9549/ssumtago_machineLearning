@@ -7,7 +7,7 @@ from sklearn.model_selection import train_test_split
 import matplotlib.pylab as plt
 # tf.set_random_seed(777)  # for reproducibility
 tf.set_random_seed(777)
-keep_prob = tf.placeholder(tf.float32)
+
 
 my_data = genfromtxt("../../data/confess_success_434.csv", delimiter=',')
 
@@ -16,9 +16,11 @@ y_data = my_data[:,-1:].tolist()
 
 x_num_of_feature = len(x_data[0])
 
-x_train_data, x_test_data , y_train_data, y_test_data=train_test_split(x_data, y_data, test_size=0.2, random_state=20)
+x_train_data, x_test_data , y_train_data, y_test_data=train_test_split(x_data, y_data, test_size=0.2, random_state=40)
 print(len(x_train_data))
 num_of_unit = 128
+
+keep_prob = tf.placeholder(tf.float32)
 X = tf.placeholder(tf.float32, shape=[None, x_num_of_feature])
 Y = tf.placeholder(tf.float32, shape=[None, 1])
 
