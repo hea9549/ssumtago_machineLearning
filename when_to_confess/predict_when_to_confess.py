@@ -11,7 +11,7 @@ my_data = genfromtxt("./data/processedDataHowmany.csv", delimiter=',')
 train_ratio = 200
 
 x_train_data = my_data[:,:-5].tolist()[:train_ratio]
-print(x_train_data)
+# print(x_train_data)
 
 y_train_data = my_data[:,-5:].tolist()[:train_ratio]
 # print(y_data)
@@ -42,14 +42,15 @@ accuracy = tf.reduce_mean(tf.cast(is_correct, tf.float32))
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
 
-    for step in range(10001):
+    for step in range(2000):
         sess.run(optimizer, feed_dict={X: x_train_data, Y: y_train_data})
         if step % 200 == 0:
             print(step, sess.run(cost, feed_dict={X: x_train_data, Y: y_train_data}))
             # predict
+
     print("Prediction:", sess.run(prediction, feed_dict={X: x_test_data}))
     # Calculate the accuracy
     print("Accuracy: ", sess.run(accuracy, feed_dict={X: x_test_data, Y: y_test_data}))
 
     saver = tf.train.Saver()
-    saver.save(sess, './when_to_confess/model/softmaxclassifier.ckpt')
+    saver.save(sess, 'testmodel')

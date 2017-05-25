@@ -14,7 +14,7 @@ y_data = my_data[:,-1:].tolist()
 
 x_num_of_feature = len(x_data[0])
 
-x_train_data, x_test_data , y_train_data, y_test_data=train_test_split(x_data,y_data,test_size=0.15,random_state=40)
+x_train_data, x_test_data , y_train_data, y_test_data=train_test_split(x_data,y_data,test_size=0.15,random_state=20)
 print(len(x_train_data))
 
 X = tf.placeholder(tf.float32, shape=[None, x_num_of_feature])

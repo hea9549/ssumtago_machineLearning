@@ -43,6 +43,7 @@ def preprocessing():
 
     # costProcessing
     processedData = np.append(processedData, preprocessing_one_hot_encoding(dataset['costProcessing']), axis=1)
+    print(preprocessing_one_hot_encoding(dataset['costProcessing']).shape)
     # print(preprocessing_one_hot_encoding(dataset['costProcessing']))
     # processedData = np.append(processedData, )
 
@@ -123,7 +124,6 @@ def preprocessing_yes_no_dont_know(cols):
             np_cols[i] = 0
         if cols[i] == '모름':
             np_cols[i] = 0.5
-
     return np_cols.reshape(-1, 1)
 
 

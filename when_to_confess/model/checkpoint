@@ -1,2 +1,2 @@
-model_checkpoint_path: "softmaxclassifier.ckpt"
-all_model_checkpoint_paths: "softmaxclassifier.ckpt"
+model_checkpoint_path: "softmaxclassifier"
+all_model_checkpoint_paths: "softmaxclassifier"
