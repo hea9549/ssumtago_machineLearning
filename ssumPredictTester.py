@@ -12,12 +12,11 @@ import random
 import time
 import datetime
 
-
 client = pymongo.MongoClient("mongodb://ssumtago:Tjaxkrh@expirit.co.kr/ssumtago")
 
 if __name__ == "__main__":
     tf.set_random_seed(777)
-    my_data = genfromtxt("./setUp/feature_man.csv", delimiter=',')
+    my_data = genfromtxt("./setUp/feature.csv", delimiter=',')
     x_data = my_data[:, :-1].tolist()
     y_data = my_data[:, -1:].tolist()
 
@@ -27,7 +26,7 @@ if __name__ == "__main__":
     X = tf.placeholder(tf.float32, shape=[None, x_num_of_feature])
     Y = tf.placeholder(tf.float32, shape=[None, 1])
 
-    model = SsumPredictModel(X, Y, keep_prob, unit_num=256,learning_rate=0.000005)
+    model = SsumPredictModel(X, Y, keep_prob, unit_num=256, learning_rate=0.000005)
     model.print_model()
     result_accuracy = 0.0
 
@@ -57,8 +56,8 @@ if __name__ == "__main__":
                     else:
                         result_accuracy = a
 
-                    # saver = tf.train.Saver()
-                    # saver.save(sess, './model/ssum_predict_man')
+                        # saver = tf.train.Saver()
+                        # saver.save(sess, './model/ssum_predict_man')
 
         print(result_accuracy)
 

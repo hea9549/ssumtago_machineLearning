@@ -2,20 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2709cacd-fce9-483f-a9bd-d5d861c280a5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/setUp/code_man.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ssumPredictModel.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ssumPredictTF.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ssumPredictTester.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/setUp/featuralizedData.csv" afterPath="$PROJECT_DIR$/setUp/feature.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/checkpoint" afterPath="$PROJECT_DIR$/model/checkpoint" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/ssum_predict.data-00000-of-00001" afterPath="$PROJECT_DIR$/model/ssum_predict.data-00000-of-00001" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/ssum_predict.index" afterPath="$PROJECT_DIR$/model/ssum_predict.index" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/ssum_predict.meta" afterPath="$PROJECT_DIR$/model/ssum_predict.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setUp/codeDataToFeature.py" afterPath="$PROJECT_DIR$/setUp/codeDataToFeature.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setUp/codeDataToFeature2.py" afterPath="$PROJECT_DIR$/setUp/codeDataToFeature2.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ssumPredict.py" afterPath="$PROJECT_DIR$/ssumPredict.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ssumPredictModel.py" afterPath="$PROJECT_DIR$/ssumPredictModel.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ssumPredictTester.py" afterPath="$PROJECT_DIR$/ssumPredictTester.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -33,8 +21,8 @@
       <file leaf-file-name="ssumPredictTester.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ssumPredictTester.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="31" column="25" lean-forward="true" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
+            <state relative-caret-position="135">
+              <caret line="19" column="37" lean-forward="true" selection-start-line="19" selection-start-column="37" selection-end-line="19" selection-end-column="37" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -45,8 +33,18 @@
       <file leaf-file-name="ssumPredictModel.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ssumPredictModel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="88" lean-forward="true" selection-start-line="4" selection-start-column="67" selection-end-line="4" selection-end-column="88" />
+            <state relative-caret-position="135">
+              <caret line="17" column="39" lean-forward="false" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ssumPredict.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ssumPredict.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="40">
+              <caret line="94" column="25" lean-forward="false" selection-start-line="94" selection-start-column="14" selection-end-line="94" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -78,9 +76,9 @@
         <option value="$PROJECT_DIR$/ssumPredict2.py" />
         <option value="$PROJECT_DIR$/setUp/codeDataToFeature2.py" />
         <option value="$PROJECT_DIR$/ssumPredict.py" />
-        <option value="$PROJECT_DIR$/ssumPredictModel.py" />
         <option value="$PROJECT_DIR$/ssumPredictTF.py" />
         <option value="$PROJECT_DIR$/setUp/ssumPredictTester.py" />
+        <option value="$PROJECT_DIR$/ssumPredictModel.py" />
         <option value="$PROJECT_DIR$/ssumPredictTester.py" />
       </list>
     </option>
@@ -117,6 +115,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="ssum" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ssum" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ssum" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="setUp" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -437,7 +449,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/ssumPredictTester.py</url>
-          <line>46</line>
+          <line>45</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
@@ -842,16 +854,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ssumPredictModel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="88" lean-forward="true" selection-start-line="4" selection-start-column="67" selection-end-line="4" selection-end-column="88" />
+        <state relative-caret-position="135">
+          <caret line="17" column="39" lean-forward="false" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ssumPredictTester.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="31" column="25" lean-forward="true" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
+        <state relative-caret-position="135">
+          <caret line="19" column="37" lean-forward="true" selection-start-line="19" selection-start-column="37" selection-end-line="19" selection-end-column="37" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>

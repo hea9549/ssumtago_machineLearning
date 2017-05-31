@@ -15,12 +15,12 @@ class SsumPredictModel:
         self.accuracy = self.accuracy()
 
     def print_model(self):
-        print("shape:",self.input_data.shape)
+        print("shape:", self.input_data.get_shape())
         print("number of unit:", self.unit_num)
         print("learning_rate", self.learning_rate)
 
     def hypothesis(self):
-        W1 = tf.get_variable("W1", shape=[self.input_data.shape[1], self.unit_num],
+        W1 = tf.get_variable("W1", shape=[self.input_data.get_shape()[1], self.unit_num],
                              initializer=tf.contrib.layers.xavier_initializer())
         b1 = tf.Variable(tf.random_normal([self.unit_num]))
         L1 = tf.nn.relu(tf.matmul(self.input_data, W1) + b1)
