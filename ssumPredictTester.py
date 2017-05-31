@@ -26,17 +26,16 @@ if __name__ == "__main__":
     X = tf.placeholder(tf.float32, shape=[None, x_num_of_feature])
     Y = tf.placeholder(tf.float32, shape=[None, 1])
 
-    model = SsumPredictModel(X, Y, keep_prob, unit_num=256, learning_rate=0.000005)
+    model = SsumPredictModel(X, Y, keep_prob, unit_num=128, learning_rate=0.00007)
     model.print_model()
     result_accuracy = 0.0
 
     for i in range(20):
-
         x_train_data, x_test_data, y_train_data, y_test_data = train_test_split(x_data, y_data, test_size=0.1,
                                                                                 random_state=random.randrange(1, 200))
         with tf.Session() as sess:
             sess.run(tf.global_variables_initializer())
-            for step in range(100000000):
+            for step in range(100):
                 cost_val, _ = sess.run([model.cost, model.train],
                                        feed_dict={X: x_train_data, Y: y_train_data, model.keep_prob: 0.6})
 
@@ -58,7 +57,7 @@ if __name__ == "__main__":
 
                         # saver = tf.train.Saver()
                         # saver.save(sess, './model/ssum_predict_man')
-
+            sess.close()
         print(result_accuracy)
 
         db_ssumtago = client['ssumtago']
