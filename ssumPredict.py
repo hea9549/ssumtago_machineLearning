@@ -1,31 +1,27 @@
 import os
-os.environ['TF_CPP_MIN_LOG_LEVEL']='2'
+
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 import tensorflow as tf
 import numpy as np
 from numpy import genfromtxt
 from sklearn.model_selection import train_test_split
 import matplotlib.pylab as plt
+
 # tf.set_random_seed(777)  # for reproducibility
 tf.set_random_seed(777)
 
-
-my_data = genfromtxt("./setUp/featuralizedData.csv", delimiter=',')
-
-x_data = my_data[:,:-1].tolist()
-y_data = my_data[:,-1:].tolist()
+my_data = genfromtxt("./setUp/code_man.csv", delimiter=',')
+# my_data = my_data[1:, :]
+print(my_data.shape)
+x_data = my_data[:, :-1].tolist()
+y_data = my_data[:, -1:].tolist()
 
 x_num_of_feature = len(x_data[0])
 print(x_num_of_feature)
-x_train_data, x_test_data , y_train_data, y_test_data=train_test_split(x_data, y_data, test_size=0.05, random_state=41)
+x_train_data, x_test_data, y_train_data, y_test_data = train_test_split(x_data, y_data, test_size=0.05,
+                                                                        random_state=55)
 print(len(x_train_data))
 num_of_unit = 256
-#
-# x_test_data = [[0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0,
-#                0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-#                0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0,
-#                0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.46666666666666656, 0.0,
-#                1.0]]
-# y_test_data = [[1.0]]
 
 keep_prob = tf.placeholder(tf.float32)
 X = tf.placeholder(tf.float32, shape=[None, x_num_of_feature])
@@ -114,38 +110,39 @@ with tf.Session() as sess:
             step_list.append(step)
 
             h, c, train_a = sess.run([hypothesis, predicted, accuracy],
-                               feed_dict={X: x_train_data, Y: y_train_data, keep_prob: 1})
+                                     feed_dict={X: x_train_data, Y: y_train_data, keep_prob: 1})
 
             accuracy_train_list.append(train_a)
             h, c, a = sess.run([hypothesis, predicted, accuracy],
                                feed_dict={X: x_test_data, Y: y_test_data, keep_prob: 1})
             # print("\nHypothesis: ", h, "\nCorrect (Y): ", c, "\nAccuracy: ", a, "Real (Y)", y_test_data)
 
-            print("train accuracy:",train_a,"test accuracy:",a,"step:",step)
+            print("cont:",cost_val,"train accuracy:", train_a, "test accuracy:", a, "step:", step)
             accuracy_test_list.append(a)
             if train_a > 0.95:
-                 break
+                break
 
     saver = tf.train.Saver()
     saver.save(sess, './model/ssum_predict')
 
-    man = 0
-    woman = 0
-    for data in x_test_data:
-        if data[-1] == 0.0:
-            woman += 1
-        if data[-1] == 1.0:
-            man += 1
+    print(y_test_data)
 
-    print("man:", man, "woman:", woman)
+    success = 0
+    fail = 0
+    for data in y_test_data:
+        if data[0] == 0.0:
+            fail += 1
+        if data[0] == 1.0:
+            success += 1
+
+    print("success:", success, "fail:", fail)
 
     gat, = plt.plot(step_list, accuracy_test_list, 'ro-')
     bat, = plt.plot(step_list, accuracy_train_list, 'bs-')
-    plt.legend([gat, bat], ['test data','train data'], loc=2)
+    plt.legend([gat, bat], ['test data', 'train data'], loc=2)
     plt.xlabel('number of step')
     plt.ylabel('accuracy')
     cell_text = []
     cell_text.append(["asd"])
-    plt.table(cellText=cell_text,loc='top')
+    plt.table(cellText=cell_text, loc='top')
     plt.show()
-

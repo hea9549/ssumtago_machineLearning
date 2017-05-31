@@ -129,4 +129,4 @@ for i in range(0, len(cols)):
 
 processed_data=np.append(processed_data,np_cols.reshape(-1,1),axis=1)
 
-np.savetxt("./featuralizedData.csv",processed_data,delimiter=",")
+np.savetxt("./feature.csv",processed_data,delimiter=",")

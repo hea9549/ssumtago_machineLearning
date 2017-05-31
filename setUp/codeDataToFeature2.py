@@ -15,14 +15,20 @@ client.close()
 ssum_preprocessor = ssumPreprocessor.SsumPreprocessor(ssum_predect_survey)
 # print(ssum_preprocessor.convert('01000112006', '02006037'))
 
-
+print(ssum_predect_survey['excludeCodes'])
 dataset = pd.read_csv("./surveyDataCode.csv", dtype=object)
 
 Label = '01000120001'
 
+# print(dataset.shape)
+
 col_name_list = list(dataset)
 all_processed_data = []
 for v in col_name_list:
+    print(v)
+    if v in ssum_predect_survey['excludeCodes']:
+        print("exclude", v)
+        continue
     cols = dataset[v]
     process_data = []
 
@@ -38,8 +44,9 @@ for v in col_name_list:
         all_processed_data = process_data
     else:
         all_processed_data = np.append(all_processed_data, process_data, axis=1)
+    print(process_data.shape)
 
-cols=dataset[Label]
+cols = dataset[Label]
 
 np_cols = np.zeros(len(cols))
 for i in range(0, len(cols)):
@@ -48,5 +55,6 @@ for i in range(0, len(cols)):
     if cols[i] == '02001002':
         np_cols[i] = 0
 
-all_processed_data=np.append(all_processed_data,np_cols.reshape(-1,1),axis=1)
+all_processed_data = np.append(all_processed_data, np_cols.reshape(-1, 1), axis=1)
 print(all_processed_data.shape)
+np.savetxt("./feature.csv",all_processed_data,delimiter=",")

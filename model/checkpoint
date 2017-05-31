@@ -1,2 +1,2 @@
-model_checkpoint_path: "ssum_predict"
-all_model_checkpoint_paths: "ssum_predict"
+model_checkpoint_path: "ssum_predict_man"
+all_model_checkpoint_paths: "ssum_predict_man"
