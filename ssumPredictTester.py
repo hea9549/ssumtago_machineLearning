@@ -32,7 +32,7 @@ if __name__ == "__main__":
         print("learning_rate", learning_rate)
 
     if len(sys.argv) > 4:
-        file_name = str(sys.argv[3])
+        file_path = str(sys.argv[3])
 
     tf.set_random_seed(777)
     my_data = genfromtxt(file_path, delimiter=',')
