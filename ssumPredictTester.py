@@ -11,12 +11,31 @@ import pymongo
 import random
 import time
 import datetime
+import sys
+from statistics import mean
 
 client = pymongo.MongoClient("mongodb://ssumtago:Tjaxkrh@expirit.co.kr/ssumtago")
 
 if __name__ == "__main__":
+    print(sys.argv)
+
+    unit_num = 128
+    learning_rate = 0.00007
+    file_path = "./setUp/feature.csv"
+
+    if len(sys.argv) > 2:
+        unit_num = sys.argv[1]
+        print("unit_num:", unit_num)
+
+    if len(sys.argv) > 3:
+        learning_rate = sys.argv[2]
+        print("learning_rate", learning_rate)
+
+    if len(sys.argv) > 4:
+        file_name = sys.argv[3]
+
     tf.set_random_seed(777)
-    my_data = genfromtxt("./setUp/feature.csv", delimiter=',')
+    my_data = genfromtxt(file_path, delimiter=',')
     x_data = my_data[:, :-1].tolist()
     y_data = my_data[:, -1:].tolist()
 
@@ -26,20 +45,20 @@ if __name__ == "__main__":
     X = tf.placeholder(tf.float32, shape=[None, x_num_of_feature])
     Y = tf.placeholder(tf.float32, shape=[None, 1])
 
-    model = SsumPredictModel(X, Y, keep_prob, unit_num=128, learning_rate=0.00007)
+    model = SsumPredictModel(X, Y, keep_prob, unit_num, learning_rate)
     model.print_model()
     result_accuracy = 0.0
-
-    for i in range(20):
+    result_array = []
+    for i in range(3):
         x_train_data, x_test_data, y_train_data, y_test_data = train_test_split(x_data, y_data, test_size=0.1,
                                                                                 random_state=random.randrange(1, 200))
         with tf.Session() as sess:
             sess.run(tf.global_variables_initializer())
-            for step in range(100):
+            for step in range(500):
                 cost_val, _ = sess.run([model.cost, model.train],
-                                       feed_dict={X: x_train_data, Y: y_train_data, model.keep_prob: 0.6})
+                                       feed_dict={X: x_train_data, Y: y_train_data, model.keep_prob: 0.7})
 
-                if step % 200 == 0:
+                if step % 100 == 0:
                     c, train_a = sess.run([model.predict, model.accuracy],
                                           feed_dict={X: x_train_data, Y: y_train_data, model.keep_prob: 1})
                     c, a = sess.run([model.predict, model.accuracy],
@@ -54,17 +73,20 @@ if __name__ == "__main__":
                         break
                     else:
                         result_accuracy = a
-
                         # saver = tf.train.Saver()
                         # saver.save(sess, './model/ssum_predict_man')
+            result_array.append(result_accuracy)
             sess.close()
-        print(result_accuracy)
 
-        db_ssumtago = client['ssumtago']
-        surveyResults = db_ssumtago['surveyResults']
-        surveyResult = {}
-        surveyResult["surveyId"] = 1
-        surveyResult["index"] = i
-        surveyResult["result"] = str(result_accuracy)
-        surveyResult["date"] = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
-        surveyResults.insert_one(surveyResult)
+    average_accuracy=sum(result_array) / float(len(result_array))
+
+    db_ssumtago = client['ssumtago']
+    surveyResults = db_ssumtago['surveyResults']
+    surveyResult = {}
+    surveyResult["surveyId"] = 1
+    surveyResult["result"] = str(average_accuracy)
+    surveyResult["unit_num"] = unit_num
+    surveyResult["learning_rate"] = str(learning_rate)
+    surveyResult["file_name"] = str(file_path)
+    surveyResult["date"] = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
+    surveyResults.insert_one(surveyResult)
