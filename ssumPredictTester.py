@@ -49,12 +49,12 @@ if __name__ == "__main__":
     model.print_model()
     result_accuracy = 0.0
     result_array = []
-    for i in range(3):
+    for i in range(20):
         x_train_data, x_test_data, y_train_data, y_test_data = train_test_split(x_data, y_data, test_size=0.1,
                                                                                 random_state=random.randrange(1, 200))
         with tf.Session() as sess:
             sess.run(tf.global_variables_initializer())
-            for step in range(500):
+            for step in range(100000000000):
                 cost_val, _ = sess.run([model.cost, model.train],
                                        feed_dict={X: x_train_data, Y: y_train_data, model.keep_prob: 0.7})
 
