@@ -15,6 +15,9 @@ import sys
 from statistics import mean
 
 client = pymongo.MongoClient("mongodb://ssumtago:Tjaxkrh@expirit.co.kr/ssumtago")
+db_ssumtago = client['ssumtago']
+surveyResults = db_ssumtago['surveyResults']
+surveyResult = {}
 
 if __name__ == "__main__":
     print(sys.argv)
@@ -55,6 +58,8 @@ if __name__ == "__main__":
     model.print_model()
     result_accuracy = 0.0
     result_array = []
+
+    surveyResult[start_date"] = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
     for i in range(20):
         x_train_data, x_test_data, y_train_data, y_test_data = train_test_split(x_data, y_data, test_size=0.1,
                                                                                 random_state=random.randrange(1, 200))
@@ -86,13 +91,13 @@ if __name__ == "__main__":
 
     average_accuracy=sum(result_array) / float(len(result_array))
 
-    db_ssumtago = client['ssumtago']
-    surveyResults = db_ssumtago['surveyResults']
-    surveyResult = {}
+
+
     surveyResult["surveyId"] = 1
     surveyResult["result"] = str(average_accuracy)
     surveyResult["unit_num"] = unit_num
     surveyResult["learning_rate"] = str(learning_rate)
     surveyResult["file_name"] = str(file_path)
-    surveyResult["date"] = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
+    surveyResult["max_learning_point"] = str(max_learning_point)
+    surveyResult["end_date"] = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
     surveyResults.insert_one(surveyResult)
