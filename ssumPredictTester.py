@@ -59,7 +59,7 @@ if __name__ == "__main__":
     result_accuracy = 0.0
     result_array = []
 
-    surveyResult[start_date"] = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
+    surveyResult["start_date"] = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
     for i in range(20):
         x_train_data, x_test_data, y_train_data, y_test_data = train_test_split(x_data, y_data, test_size=0.1,
                                                                                 random_state=random.randrange(1, 200))
