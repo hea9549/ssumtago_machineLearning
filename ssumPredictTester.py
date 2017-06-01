@@ -24,15 +24,15 @@ if __name__ == "__main__":
     file_path = "./setUp/feature.csv"
 
     if len(sys.argv) > 2:
-        unit_num = sys.argv[1]
+        unit_num = int(sys.argv[1])
         print("unit_num:", unit_num)
 
     if len(sys.argv) > 3:
-        learning_rate = sys.argv[2]
+        learning_rate = float(sys.argv[2])
         print("learning_rate", learning_rate)
 
     if len(sys.argv) > 4:
-        file_name = sys.argv[3]
+        file_name = str(sys.argv[3])
 
     tf.set_random_seed(777)
     my_data = genfromtxt(file_path, delimiter=',')
