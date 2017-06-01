@@ -26,6 +26,7 @@ if __name__ == "__main__":
     learning_rate = 0.00007
     file_path = "./setUp/feature.csv"
     max_learning_point = 0.9
+    cost_check_step = 100
     if len(sys.argv) >= 2:
         unit_num = int(sys.argv[1])
         print("unit_num:", unit_num)
@@ -39,6 +40,9 @@ if __name__ == "__main__":
 
     if len(sys.argv) >= 5:
         max_learning_point = float(sys.argv[4])
+
+    if len(sys.argv) >= 6:
+        cost_check_step = int(sys.argv[5])
 
 
     tf.set_random_seed(777)
@@ -69,7 +73,7 @@ if __name__ == "__main__":
                 cost_val, _ = sess.run([model.cost, model.train],
                                        feed_dict={X: x_train_data, Y: y_train_data, model.keep_prob: 0.7})
 
-                if step % 100 == 0:
+                if step % cost_check_step == 0:
                     c, train_a = sess.run([model.predict, model.accuracy],
                                           feed_dict={X: x_train_data, Y: y_train_data, model.keep_prob: 1})
                     c, a = sess.run([model.predict, model.accuracy],
