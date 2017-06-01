@@ -38,7 +38,7 @@ if __name__ == "__main__":
         file_path = str(sys.argv[3])
 
     if len(sys.argv) >= 5:
-        max_learning_point = str(sys.argv[4])
+        max_learning_point = float(sys.argv[4])
 
 
     tf.set_random_seed(777)
