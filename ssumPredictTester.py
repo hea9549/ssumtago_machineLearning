@@ -22,7 +22,7 @@ if __name__ == "__main__":
     unit_num = 128
     learning_rate = 0.00007
     file_path = "./setUp/feature.csv"
-
+    max_learning_point = 0.9
     if len(sys.argv) >= 2:
         unit_num = int(sys.argv[1])
         print("unit_num:", unit_num)
@@ -33,6 +33,9 @@ if __name__ == "__main__":
 
     if len(sys.argv) >= 4:
         file_path = str(sys.argv[3])
+
+    if len(sys.argv) >= 5:
+        max_learning_point = str(sys.argv[4])
 
 
     tf.set_random_seed(777)
@@ -69,7 +72,7 @@ if __name__ == "__main__":
 
                     print("cont:", cost_val, "train accuracy:", train_a, "test accuracy:", a, "step:", step)
 
-                    if train_a > 0.9:
+                    if train_a > max_learning_point:
                         break
 
                     if np.isnan(cost_val):
