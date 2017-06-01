@@ -23,22 +23,25 @@ if __name__ == "__main__":
     learning_rate = 0.00007
     file_path = "./setUp/feature.csv"
 
-    if len(sys.argv) > 2:
+    if len(sys.argv) >= 2:
         unit_num = int(sys.argv[1])
         print("unit_num:", unit_num)
 
-    if len(sys.argv) > 3:
+    if len(sys.argv) >= 3:
         learning_rate = float(sys.argv[2])
         print("learning_rate", learning_rate)
 
-    if len(sys.argv) > 4:
+    if len(sys.argv) >= 4:
         file_path = str(sys.argv[3])
+
 
     tf.set_random_seed(777)
     my_data = genfromtxt(file_path, delimiter=',')
+
+    print(file_path)
     x_data = my_data[:, :-1].tolist()
     y_data = my_data[:, -1:].tolist()
-
+    print(len(x_data))
     x_num_of_feature = len(x_data[0])
 
     keep_prob = tf.placeholder(tf.float32)
