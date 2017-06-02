@@ -1,5 +1,6 @@
 import os
 
+from ssumPredictBatch import SsumPredictModelBatch
 from ssumPredictModel import SsumPredictModel
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
@@ -10,7 +11,7 @@ import tensorflow as tf
 
 if __name__ == "__main__":
     tf.set_random_seed(777)
-    my_data = genfromtxt("./setUp/feature_man.csv", delimiter=',')
+    my_data = genfromtxt("./setUp/feature_woman.csv", delimiter=',')
     x_data = my_data[:, :-1].tolist()
     y_data = my_data[:, -1:].tolist()
 
@@ -22,17 +23,18 @@ if __name__ == "__main__":
     X = tf.placeholder(tf.float32, shape=[None, x_num_of_feature])
     Y = tf.placeholder(tf.float32, shape=[None, 1])
 
-    model = SsumPredictModel(X, Y, keep_prob, unit_num=64)
+    model = SsumPredictModelBatch(X, Y, keep_prob, unit_num=512, learning_rate=0.00007, batch_nn=True)
     model.print_model()
 
     result_accuracy = 0.0
+
     with tf.Session() as sess:
         sess.run(tf.global_variables_initializer())
         for step in range(100000001):
             cost_val, _ = sess.run([model.cost, model.train],
-                                   feed_dict={X: x_train_data, Y: y_train_data, model.keep_prob: 0.6})
+                                   feed_dict={X: x_train_data, Y: y_train_data, model.keep_prob: 0.7})
 
-            if step % 100 == 0:
+            if step % 5 == 0:
                 c, train_a = sess.run([model.predict, model.accuracy],
                                       feed_dict={X: x_train_data, Y: y_train_data, model.keep_prob: 1})
                 c, a = sess.run([model.predict, model.accuracy],
@@ -40,7 +42,7 @@ if __name__ == "__main__":
 
                 print("cont:", cost_val, "train accuracy:", train_a, "test accuracy:", a, "step:", step)
 
-            if train_a > 0.9:
+            if train_a > 0.99:
                 break
 
             if np.isnan(cost_val):
