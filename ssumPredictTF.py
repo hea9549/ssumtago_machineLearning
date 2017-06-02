@@ -26,10 +26,14 @@ if __name__ == "__main__":
     model = SsumPredictModelBatch(X, Y, keep_prob, unit_num=512, learning_rate=0.00007, batch_nn=True)
     model.print_model()
 
+    # tf.summary.scalar('cost', model.cost)
+    # tf.summary.histogram('predict', model.accuracy)
+    # merged = tf.summary.merge_all()
     result_accuracy = 0.0
 
     with tf.Session() as sess:
         sess.run(tf.global_variables_initializer())
+        train_writer = tf.summary.FileWriter('./tensorboard', sess.graph)
         for step in range(100000001):
             cost_val, _ = sess.run([model.cost, model.train],
                                    feed_dict={X: x_train_data, Y: y_train_data, model.keep_prob: 0.7})
@@ -40,6 +44,8 @@ if __name__ == "__main__":
                 c, a = sess.run([model.predict, model.accuracy],
                                 feed_dict={X: x_test_data, Y: y_test_data, model.keep_prob: 1})
 
+                # train_writer.add_summary(cost_val, step)
+                # train_writer.add_summary(c, step)
                 print("cont:", cost_val, "train accuracy:", train_a, "test accuracy:", a, "step:", step)
 
             if train_a > 0.99:
@@ -52,6 +58,7 @@ if __name__ == "__main__":
 
         saver = tf.train.Saver()
         saver.save(sess, './model/ssum_predict_man')
+
 
     print("final accurary:", result_accuracy)
     success = 0

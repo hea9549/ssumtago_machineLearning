@@ -23,11 +23,11 @@ surveyResult = {}
 if __name__ == "__main__":
     print(sys.argv)
 
-    unit_num = 128
-    learning_rate = 0.00007
+    unit_num = 256
+    learning_rate = 0.00005
     file_path = "./setUp/feature.csv"
     max_learning_point = 0.96
-    cost_check_step = 100
+    cost_check_step = 10
     if len(sys.argv) >= 2:
         unit_num = int(sys.argv[1])
         print("unit_num:", unit_num)
