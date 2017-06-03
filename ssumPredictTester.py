@@ -82,14 +82,14 @@ if __name__ == "__main__":
                     print("cont:", cost_val, "train accuracy:", train_a, "test accuracy:", a, "step:", step)
 
                     if train_a > max_learning_point:
+                        result_accuracy = a
                         break
 
                     if np.isnan(cost_val):
                         break
                     else:
                         result_accuracy = a
-                        # saver = tf.train.Saver()
-                        # saver.save(sess, './model/ssum_predict_man')
+
             result_array.append(result_accuracy)
             sess.close()
 

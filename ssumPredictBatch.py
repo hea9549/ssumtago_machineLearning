@@ -25,25 +25,26 @@ class SsumPredictModelBatch:
         W1 = tf.get_variable("W1", shape=[self.input_data.get_shape()[1], self.unit_num],
                              initializer=tf.contrib.layers.xavier_initializer())
         b1 = tf.Variable(tf.random_normal([self.unit_num]))
-        b1 = self.batch_norm_wrapper(tf.matmul(self.input_data, W1) + b1, self.batch_nn)
+        # b1 = self.batch_norm_wrapper(tf.matmul(self.input_data, W1) + b1, self.batch_nn)
+        b1 = tf.matmul(self.input_data, W1) + b1
         L1 = tf.nn.relu(b1)
-        # L1 = tf.nn.dropout(L1, self.keep_prob)
+        L1 = tf.nn.dropout(L1, self.keep_prob)
 
         W2 = tf.get_variable("W2", shape=[self.unit_num, self.unit_num],
                              initializer=tf.contrib.layers.xavier_initializer())
         b2 = tf.Variable(tf.random_normal([self.unit_num]))
-        b2 = self.batch_norm_wrapper(tf.matmul(L1, W2) + b2, self.batch_nn)
-        # b2 = tf.matmul(L1, W2) + b2
+        # b2 = self.batch_norm_wrapper(tf.matmul(L1, W2) + b2, self.batch_nn)
+        b2 = tf.matmul(L1, W2) + b2
         L2 = tf.nn.relu(b2)
-        # L2 = tf.nn.dropout(L2, self.keep_prob)
+        L2 = tf.nn.dropout(L2, self.keep_prob)
 
         W3 = tf.get_variable("W3", shape=[self.unit_num, self.unit_num],
                              initializer=tf.contrib.layers.xavier_initializer())
         b3 = tf.Variable(tf.random_normal([self.unit_num]))
-        b3 = self.batch_norm_wrapper(tf.matmul(L2, W3) + b3, self.batch_nn);
-        # b3 = tf.matmul(L2, W3) + b3
+        # b3 = self.batch_norm_wrapper(tf.matmul(L2, W3) + b3, self.batch_nn);
+        b3 = tf.matmul(L2, W3) + b3
         L3 = tf.nn.relu(b3)
-        # L3 = tf.nn.dropout(L3, self.keep_prob)
+        L3 = tf.nn.dropout(L3, self.keep_prob)
 
         W4 = tf.get_variable("W4", shape=[self.unit_num, self.unit_num],
                              initializer=tf.contrib.layers.xavier_initializer())
@@ -64,7 +65,7 @@ class SsumPredictModelBatch:
         W6 = tf.get_variable("W6", shape=[self.unit_num, self.unit_num],
                              initializer=tf.contrib.layers.xavier_initializer())
         b6 = tf.Variable(tf.random_normal([self.unit_num]))
-        # b6 = self.batch_norm_wrapper(tf.matmul(L5, W6) + b6, True)
+        # b6 = self.batch_norm_wrapper(tf.matmul(L5, W6) + b6, self.batch_nn)
         b6 = tf.matmul(L5, W6) + b6
         L6 = tf.nn.relu(b6)
         L6 = tf.nn.dropout(L6, self.keep_prob)
@@ -72,7 +73,7 @@ class SsumPredictModelBatch:
         W7 = tf.get_variable("W7", shape=[self.unit_num, self.unit_num],
                              initializer=tf.contrib.layers.xavier_initializer())
         b7 = tf.Variable(tf.random_normal([self.unit_num]))
-        # b7 = self.batch_norm_wrapper(tf.matmul(L6, W7) + b7, True)
+        # b7 = self.batch_norm_wrapper(tf.matmul(L6, W7) + b7, self.batch_nn)
         b7 = tf.matmul(L6, W7) + b7
         L7 = tf.nn.relu(b7)
         L7 = tf.nn.dropout(L7, self.keep_prob)
@@ -80,6 +81,7 @@ class SsumPredictModelBatch:
         W8 = tf.get_variable("W8", shape=[self.unit_num, self.unit_num],
                              initializer=tf.contrib.layers.xavier_initializer())
         b8 = tf.Variable(tf.random_normal([self.unit_num]))
+        # b8 = self.batch_norm_wrapper(tf.matmul(L7, W8) + b8, self.batch_nn)
         b8 = tf.matmul(L7, W8) + b8
         L8 = tf.nn.relu(b8)
         L8 = tf.nn.dropout(L8, self.keep_prob)
@@ -87,6 +89,7 @@ class SsumPredictModelBatch:
         W9 = tf.get_variable("W9", shape=[self.unit_num, 1],
                              initializer=tf.contrib.layers.xavier_initializer())
         b9 = tf.Variable(tf.random_normal([1]))
+
         hypothesis = tf.sigmoid(tf.matmul(L8, W9) + b9)
 
         return hypothesis

@@ -58,13 +58,13 @@ if __name__ == "__main__":
     X = tf.placeholder(tf.float32, shape=[None, x_num_of_feature])
     Y = tf.placeholder(tf.float32, shape=[None, 1])
 
-    model = SsumPredictModelBatch(X, Y, keep_prob, unit_num=512, learning_rate=0.000007, batch_nn=True)
+    model = SsumPredictModelBatch(X, Y, keep_prob, unit_num=256, learning_rate=0.0007, batch_nn=False)
     model.print_model()
     result_accuracy = 0.0
     result_array = []
 
     surveyResult["start_date"] = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
-    for i in range(20):
+    for i in range(10):
         x_train_data, x_test_data, y_train_data, y_test_data = train_test_split(x_data, y_data, test_size=0.1,
                                                                                 random_state=random.randrange(1, 200))
         with tf.Session() as sess:
@@ -88,8 +88,6 @@ if __name__ == "__main__":
                         break
                     else:
                         result_accuracy = a
-                        # saver = tf.train.Saver()
-                        # saver.save(sess, './model/ssum_predict_man')
             result_array.append(result_accuracy)
             sess.close()
 
@@ -101,5 +99,6 @@ if __name__ == "__main__":
     surveyResult["learning_rate"] = str(learning_rate)
     surveyResult["file_name"] = str(file_path)
     surveyResult["max_learning_point"] = str(max_learning_point)
+    surveyResult["batch"] = "true"
     surveyResult["end_date"] = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
     surveyResults.insert_one(surveyResult)

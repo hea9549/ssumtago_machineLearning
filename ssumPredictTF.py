@@ -11,7 +11,7 @@ import tensorflow as tf
 
 if __name__ == "__main__":
     tf.set_random_seed(777)
-    my_data = genfromtxt("./setUp/feature_woman.csv", delimiter=',')
+    my_data = genfromtxt("./setUp/feature.csv", delimiter=',')
     x_data = my_data[:, :-1].tolist()
     y_data = my_data[:, -1:].tolist()
 
@@ -23,12 +23,9 @@ if __name__ == "__main__":
     X = tf.placeholder(tf.float32, shape=[None, x_num_of_feature])
     Y = tf.placeholder(tf.float32, shape=[None, 1])
 
-    model = SsumPredictModelBatch(X, Y, keep_prob, unit_num=512, learning_rate=0.00007, batch_nn=True)
+    model = SsumPredictModel(X, Y, keep_prob, unit_num=256, learning_rate=0.00005)
     model.print_model()
 
-    # tf.summary.scalar('cost', model.cost)
-    # tf.summary.histogram('predict', model.accuracy)
-    # merged = tf.summary.merge_all()
     result_accuracy = 0.0
 
     with tf.Session() as sess:
@@ -38,7 +35,7 @@ if __name__ == "__main__":
             cost_val, _ = sess.run([model.cost, model.train],
                                    feed_dict={X: x_train_data, Y: y_train_data, model.keep_prob: 0.7})
 
-            if step % 5 == 0:
+            if step % 100 == 0:
                 c, train_a = sess.run([model.predict, model.accuracy],
                                       feed_dict={X: x_train_data, Y: y_train_data, model.keep_prob: 1})
                 c, a = sess.run([model.predict, model.accuracy],
@@ -48,7 +45,7 @@ if __name__ == "__main__":
                 # train_writer.add_summary(c, step)
                 print("cont:", cost_val, "train accuracy:", train_a, "test accuracy:", a, "step:", step)
 
-            if train_a > 0.99:
+            if train_a > 0.85:
                 break
 
             if np.isnan(cost_val):
@@ -57,7 +54,7 @@ if __name__ == "__main__":
                 result_accuracy = a
 
         saver = tf.train.Saver()
-        saver.save(sess, './model/ssum_predict_man')
+        saver.save(sess, './model/ssum_predict')
 
 
     print("final accurary:", result_accuracy)

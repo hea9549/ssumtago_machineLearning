@@ -1,0 +1,39 @@
+{
+    "requestPredict": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "definitions": {},
+        "id": "http://example.com/example.json",
+        "properties": {
+            "data": {
+                "items": {
+                    "properties": {
+                        "answerCode": {
+                            "type": "string"
+                        },
+                        "questionCode": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "answerCode",
+                        "questionCode"
+                    ],
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "surveyId": {
+                "type": "integer"
+            },
+            "version": {
+                "type": "string"
+            }
+        },
+        "required": [
+            "surveyId",
+            "version",
+            "data"
+        ],
+        "type": "object"
+    }
+}

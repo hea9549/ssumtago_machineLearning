@@ -2,7 +2,7 @@ import tensorflow as tf
 
 
 class SsumPredictModel:
-    def __init__(self, input_data, label, keep_prob, unit_num=128, learning_rate=0.00007):
+    def __init__(self, input_data, label, keep_prob, unit_num=512, learning_rate=0.00007):
         self.input_data = input_data
         self.label = label
         self.unit_num = unit_num
