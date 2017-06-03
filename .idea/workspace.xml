@@ -1,26 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2709cacd-fce9-483f-a9bd-d5d861c280a5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/decorator.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/main.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/schema.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/ssumPredictService.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/checkpoint" afterPath="$PROJECT_DIR$/model/checkpoint" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/ssum_predict.data-00000-of-00001" afterPath="$PROJECT_DIR$/model/ssum_predict.data-00000-of-00001" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/ssum_predict.index" afterPath="$PROJECT_DIR$/model/ssum_predict.index" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/ssum_predict.meta" afterPath="$PROJECT_DIR$/model/ssum_predict.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/ssum_predict_man.data-00000-of-00001" afterPath="$PROJECT_DIR$/model/ssum_predict_man.data-00000-of-00001" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/ssum_predict_man.index" afterPath="$PROJECT_DIR$/model/ssum_predict_man.index" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/ssum_predict_man.meta" afterPath="$PROJECT_DIR$/model/ssum_predict_man.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ssumPredictBatch.py" afterPath="$PROJECT_DIR$/ssumPredictBatch.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ssumPredictModel.py" afterPath="$PROJECT_DIR$/ssumPredictModel.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ssumPredictTF.py" afterPath="$PROJECT_DIR$/ssumPredictTF.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ssumPredictTestB.py" afterPath="$PROJECT_DIR$/ssumPredictTestB.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ssumPredictTester.py" afterPath="$PROJECT_DIR$/ssumPredictTester.py" />
-    </list>
+    <list default="true" id="2709cacd-fce9-483f-a9bd-d5d861c280a5" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -51,6 +32,26 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="204">
               <caret line="26" column="23" lean-forward="true" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ssum_predict.meta" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/model/ssum_predict.meta">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ssum_predict.index" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/model/ssum_predict.index">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -463,27 +464,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/setUp/ssumPreprocessor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="18" lean-forward="false" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setUp/feature.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setUp/surveyDataCode.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/setUp/codeDataToFeature2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -828,6 +808,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1035">
           <caret line="91" column="0" lean-forward="true" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/ssum_predict.meta">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/ssum_predict.index">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/ssum_predict.data-00000-of-00001">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
